@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(lw)",
+      "Read(//Users/dnoordman/git-worktree/**)",
+      "Bash(source /Users/dnoordman/git-worktree/bash_aliases)",
+      "Bash(source ~/.zshrc)",
+      "Bash(export PATH=\"/usr/bin:/bin:/usr/sbin:/sbin:$PATH\")",
+      "Bash(echo:*)",
+      "Bash(awk:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
