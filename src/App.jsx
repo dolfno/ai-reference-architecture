@@ -68,7 +68,7 @@ function App() {
         {showDataManager ? (
           <div className="data-manager-overlay">
             <div className="data-manager-container">
-              <button 
+              <button
                 onClick={toggleDataManager}
                 className="close-data-manager"
                 title="Close Data Manager"

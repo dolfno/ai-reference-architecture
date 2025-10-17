@@ -3,18 +3,18 @@
  */
 
 const STORAGE_KEYS = {
-  ARCHITECTURE_COMPONENTS: 'ai-reference-architecture-components',
-  CATEGORIES: 'ai-reference-architecture-categories'
+    ARCHITECTURE_COMPONENTS: 'ai-reference-architecture-components',
+    CATEGORIES: 'ai-reference-architecture-categories'
 };
 
 // Default data that will be used if localStorage is empty
 const defaultArchitectureComponents = {
-  "llm-models": {
-    id: "llm-models",
-    title: "Large Language Models",
-    category: "core",
-    description: "Foundation models that power GenAI applications",
-    details: `Large Language Models (LLMs) are neural networks trained on vast amounts of text data. They form the foundation of most GenAI applications.
+    "llm-models": {
+        id: "llm-models",
+        title: "Large Language Models",
+        category: "core",
+        description: "Foundation models that power GenAI applications",
+        details: `Large Language Models (LLMs) are neural networks trained on vast amounts of text data. They form the foundation of most GenAI applications.
 
 **Key Characteristics:**
 - Pre-trained on diverse text corpora
@@ -35,15 +35,15 @@ const defaultArchitectureComponents = {
 - Summarization
 - Translation
 - Code generation`,
-    connections: ["embeddings", "prompt-engineering", "fine-tuning"]
-  },
+        connections: ["embeddings", "prompt-engineering", "fine-tuning"]
+    },
 
-  "embeddings": {
-    id: "embeddings",
-    title: "Embeddings",
-    category: "core",
-    description: "Vector representations of text for semantic understanding",
-    details: `Embeddings convert text into high-dimensional vectors that capture semantic meaning, enabling machines to understand relationships between words and concepts.
+    "embeddings": {
+        id: "embeddings",
+        title: "Embeddings",
+        category: "core",
+        description: "Vector representations of text for semantic understanding",
+        details: `Embeddings convert text into high-dimensional vectors that capture semantic meaning, enabling machines to understand relationships between words and concepts.
 
 **How They Work:**
 - Text is converted to numerical vectors (typically 384-3072 dimensions)
@@ -62,15 +62,15 @@ const defaultArchitectureComponents = {
 - Clustering and classification
 - Recommendation systems
 - RAG (Retrieval Augmented Generation)`,
-    connections: ["vector-db", "rag", "semantic-search"]
-  },
+        connections: ["vector-db", "rag", "semantic-search"]
+    },
 
-  "vector-db": {
-    id: "vector-db",
-    title: "Vector Databases",
-    category: "core",
-    description: "Specialized databases for storing and querying embeddings",
-    details: `Vector databases are optimized for storing, indexing, and querying high-dimensional vectors (embeddings) efficiently.
+    "vector-db": {
+        id: "vector-db",
+        title: "Vector Databases",
+        category: "core",
+        description: "Specialized databases for storing and querying embeddings",
+        details: `Vector databases are optimized for storing, indexing, and querying high-dimensional vectors (embeddings) efficiently.
 
 **Key Features:**
 - Fast similarity search (ANN - Approximate Nearest Neighbor)
@@ -92,15 +92,15 @@ const defaultArchitectureComponents = {
 - Recommendation systems
 - Duplicate detection
 - Anomaly detection`,
-    connections: ["embeddings", "rag", "semantic-search"]
-  },
+        connections: ["embeddings", "rag", "semantic-search"]
+    },
 
-  "prompt-engineering": {
-    id: "prompt-engineering",
-    title: "Prompt Engineering",
-    category: "core",
-    description: "Techniques for crafting effective prompts to guide LLM behavior",
-    details: `Prompt engineering is the practice of designing inputs to elicit desired outputs from language models.
+    "prompt-engineering": {
+        id: "prompt-engineering",
+        title: "Prompt Engineering",
+        category: "core",
+        description: "Techniques for crafting effective prompts to guide LLM behavior",
+        details: `Prompt engineering is the practice of designing inputs to elicit desired outputs from language models.
 
 **Core Techniques:**
 
@@ -122,15 +122,15 @@ const defaultArchitectureComponents = {
 - Constitutional AI principles
 - Self-consistency prompting
 - ReAct (Reasoning + Acting)`,
-    connections: ["llm-models", "agents", "guardrails"]
-  },
+        connections: ["llm-models", "agents", "guardrails"]
+    },
 
-  "rag": {
-    id: "rag",
-    title: "RAG (Retrieval Augmented Generation)",
-    category: "advanced",
-    description: "Combining retrieval with generation for knowledge-grounded responses",
-    details: `RAG enhances LLM responses by retrieving relevant information from external knowledge bases before generation.
+    "rag": {
+        id: "rag",
+        title: "RAG (Retrieval Augmented Generation)",
+        category: "advanced",
+        description: "Combining retrieval with generation for knowledge-grounded responses",
+        details: `RAG enhances LLM responses by retrieving relevant information from external knowledge bases before generation.
 
 **Architecture:**
 1. **Query Processing**: Convert user query to embedding
@@ -152,15 +152,15 @@ const defaultArchitectureComponents = {
 - Multi-query RAG: Multiple retrieval strategies
 - Agentic RAG: With reasoning and tool use
 - GraphRAG: Using knowledge graphs`,
-    connections: ["vector-db", "embeddings", "llm-models", "agents"]
-  },
+        connections: ["vector-db", "embeddings", "llm-models", "agents"]
+    },
 
-  "agents": {
-    id: "agents",
-    title: "AI Agents",
-    category: "advanced",
-    description: "Autonomous systems that can plan, reason, and take actions",
-    details: `AI Agents are systems that use LLMs to autonomously complete complex tasks through planning, reasoning, and tool use.
+    "agents": {
+        id: "agents",
+        title: "AI Agents",
+        category: "advanced",
+        description: "Autonomous systems that can plan, reason, and take actions",
+        details: `AI Agents are systems that use LLMs to autonomously complete complex tasks through planning, reasoning, and tool use.
 
 **Core Capabilities:**
 - **Planning**: Breaking down tasks into steps
@@ -189,15 +189,15 @@ const defaultArchitectureComponents = {
 - Data analysis automation
 - Code generation and debugging
 - Customer support automation`,
-    connections: ["llm-models", "rag", "function-calling", "orchestration"]
-  },
+        connections: ["llm-models", "rag", "function-calling", "orchestration"]
+    },
 
-  "function-calling": {
-    id: "function-calling",
-    title: "Function Calling",
-    category: "advanced",
-    description: "Enabling LLMs to call external tools and APIs",
-    details: `Function calling allows LLMs to interact with external systems by invoking predefined functions with structured parameters.
+    "function-calling": {
+        id: "function-calling",
+        title: "Function Calling",
+        category: "advanced",
+        description: "Enabling LLMs to call external tools and APIs",
+        details: `Function calling allows LLMs to interact with external systems by invoking predefined functions with structured parameters.
 
 **How It Works:**
 1. Define available functions with schemas
@@ -228,15 +228,15 @@ const defaultArchitectureComponents = {
 - Error handling
 - Rate limiting
 - Security validation`,
-    connections: ["agents", "llm-models", "orchestration"]
-  },
+        connections: ["agents", "llm-models", "orchestration"]
+    },
 
-  "fine-tuning": {
-    id: "fine-tuning",
-    title: "Fine-tuning",
-    category: "advanced",
-    description: "Customizing models for specific tasks or domains",
-    details: `Fine-tuning adapts pre-trained models to specific tasks or domains by training on custom datasets.
+    "fine-tuning": {
+        id: "fine-tuning",
+        title: "Fine-tuning",
+        category: "advanced",
+        description: "Customizing models for specific tasks or domains",
+        details: `Fine-tuning adapts pre-trained models to specific tasks or domains by training on custom datasets.
 
 **Approaches:**
 
@@ -266,15 +266,15 @@ const defaultArchitectureComponents = {
 - RAG for knowledge
 - Prompt engineering
 - Instruction tuning`,
-    connections: ["llm-models", "evaluation", "data-pipeline"]
-  },
+        connections: ["llm-models", "evaluation", "data-pipeline"]
+    },
 
-  "evaluation": {
-    id: "evaluation",
-    title: "Evaluation & Testing",
-    category: "advanced",
-    description: "Measuring and validating GenAI application quality",
-    details: `Systematic evaluation ensures GenAI applications meet quality, safety, and performance requirements.
+    "evaluation": {
+        id: "evaluation",
+        title: "Evaluation & Testing",
+        category: "advanced",
+        description: "Measuring and validating GenAI application quality",
+        details: `Systematic evaluation ensures GenAI applications meet quality, safety, and performance requirements.
 
 **Evaluation Dimensions:**
 
@@ -313,15 +313,15 @@ const defaultArchitectureComponents = {
 - Track prompt versions
 - Monitor in production
 - Regression testing`,
-    connections: ["llm-models", "monitoring", "guardrails"]
-  },
+        connections: ["llm-models", "monitoring", "guardrails"]
+    },
 
-  "guardrails": {
-    id: "guardrails",
-    title: "Guardrails",
-    category: "advanced",
-    description: "Safety and validation mechanisms for LLM outputs",
-    details: `Guardrails are systems that ensure LLM inputs and outputs meet safety, quality, and business requirements.
+    "guardrails": {
+        id: "guardrails",
+        title: "Guardrails",
+        category: "advanced",
+        description: "Safety and validation mechanisms for LLM outputs",
+        details: `Guardrails are systems that ensure LLM inputs and outputs meet safety, quality, and business requirements.
 
 **Types of Guardrails:**
 
@@ -356,15 +356,15 @@ const defaultArchitectureComponents = {
 - LangKit
 - Llama Guard
 - Azure AI Content Safety`,
-    connections: ["llm-models", "evaluation", "monitoring"]
-  },
+        connections: ["llm-models", "evaluation", "monitoring"]
+    },
 
-  "semantic-search": {
-    id: "semantic-search",
-    title: "Semantic Search",
-    category: "advanced",
-    description: "Meaning-based search using embeddings",
-    details: `Semantic search finds information based on meaning and intent rather than just keyword matching.
+    "semantic-search": {
+        id: "semantic-search",
+        title: "Semantic Search",
+        category: "advanced",
+        description: "Meaning-based search using embeddings",
+        details: `Semantic search finds information based on meaning and intent rather than just keyword matching.
 
 **How It Works:**
 1. Documents are converted to embeddings
@@ -397,15 +397,15 @@ Combining semantic and keyword search:
 - Store in vector database
 - Embed queries in real-time
 - Return top-K similar documents`,
-    connections: ["embeddings", "vector-db", "rag"]
-  },
+        connections: ["embeddings", "vector-db", "rag"]
+    },
 
-  "orchestration": {
-    id: "orchestration",
-    title: "Orchestration",
-    category: "advanced",
-    description: "Managing complex workflows and multi-step processes",
-    details: `Orchestration coordinates multiple components and steps in GenAI applications to create complex workflows.
+    "orchestration": {
+        id: "orchestration",
+        title: "Orchestration",
+        category: "advanced",
+        description: "Managing complex workflows and multi-step processes",
+        details: `Orchestration coordinates multiple components and steps in GenAI applications to create complex workflows.
 
 **Key Concepts:**
 
@@ -447,15 +447,15 @@ Combining semantic and keyword search:
 - Multi-step data processing
 - Conversational AI
 - Document processing pipelines`,
-    connections: ["agents", "rag", "function-calling"]
-  },
+        connections: ["agents", "rag", "function-calling"]
+    },
 
-  "data-pipeline": {
-    id: "data-pipeline",
-    title: "Data Pipeline",
-    category: "infrastructure",
-    description: "Processing and preparing data for GenAI applications",
-    details: `Data pipelines handle the collection, processing, and transformation of data for GenAI systems.
+    "data-pipeline": {
+        id: "data-pipeline",
+        title: "Data Pipeline",
+        category: "infrastructure",
+        description: "Processing and preparing data for GenAI applications",
+        details: `Data pipelines handle the collection, processing, and transformation of data for GenAI systems.
 
 **Pipeline Stages:**
 
@@ -494,15 +494,15 @@ Combining semantic and keyword search:
 - Unstructured.io
 - LangChain document loaders
 - LlamaIndex data connectors`,
-    connections: ["embeddings", "vector-db", "fine-tuning"]
-  },
+        connections: ["embeddings", "vector-db", "fine-tuning"]
+    },
 
-  "monitoring": {
-    id: "monitoring",
-    title: "Monitoring & Observability",
-    category: "infrastructure",
-    description: "Tracking performance, quality, and costs in production",
-    details: `Monitoring provides visibility into GenAI application behavior, quality, and resource usage in production.
+    "monitoring": {
+        id: "monitoring",
+        title: "Monitoring & Observability",
+        category: "infrastructure",
+        description: "Tracking performance, quality, and costs in production",
+        details: `Monitoring provides visibility into GenAI application behavior, quality, and resource usage in production.
 
 **Key Metrics:**
 
@@ -544,15 +544,15 @@ Combining semantic and keyword search:
 - Monitor for drift
 - Set up alerts
 - A/B test changes`,
-    connections: ["evaluation", "guardrails", "deployment"]
-  },
+        connections: ["evaluation", "guardrails", "deployment"]
+    },
 
-  "deployment": {
-    id: "deployment",
-    title: "Deployment",
-    category: "infrastructure",
-    description: "Strategies for deploying GenAI applications to production",
-    details: `Deployment involves making GenAI applications available to users reliably and efficiently.
+    "deployment": {
+        id: "deployment",
+        title: "Deployment",
+        category: "infrastructure",
+        description: "Strategies for deploying GenAI applications to production",
+        details: `Deployment involves making GenAI applications available to users reliably and efficiently.
 
 **Deployment Options:**
 
@@ -588,15 +588,15 @@ Combining semantic and keyword search:
 - Hugging Face Spaces
 - Modal, Replicate
 - RunPod, Lambda Labs (GPU)`,
-    connections: ["monitoring", "scaling", "security"]
-  },
+        connections: ["monitoring", "scaling", "security"]
+    },
 
-  "scaling": {
-    id: "scaling",
-    title: "Scaling",
-    category: "infrastructure",
-    description: "Handling increased load and optimizing performance",
-    details: `Scaling strategies ensure GenAI applications perform well under varying loads while managing costs.
+    "scaling": {
+        id: "scaling",
+        title: "Scaling",
+        category: "infrastructure",
+        description: "Handling increased load and optimizing performance",
+        details: `Scaling strategies ensure GenAI applications perform well under varying loads while managing costs.
 
 **Scaling Dimensions:**
 
@@ -639,15 +639,15 @@ Combining semantic and keyword search:
 - Async processing
 - CDN for static assets
 - Database read replicas`,
-    connections: ["deployment", "monitoring", "caching"]
-  },
+        connections: ["deployment", "monitoring", "caching"]
+    },
 
-  "caching": {
-    id: "caching",
-    title: "Caching",
-    category: "infrastructure",
-    description: "Storing and reusing results to reduce costs and latency",
-    details: `Caching in GenAI applications reduces costs and improves response times by reusing previous results.
+    "caching": {
+        id: "caching",
+        title: "Caching",
+        category: "infrastructure",
+        description: "Storing and reusing results to reduce costs and latency",
+        details: `Caching in GenAI applications reduces costs and improves response times by reusing previous results.
 
 **Caching Strategies:**
 
@@ -689,15 +689,15 @@ Combining semantic and keyword search:
 - Invalidate stale data
 - Cache at multiple levels
 - Consider privacy implications`,
-    connections: ["scaling", "deployment", "embeddings"]
-  },
+        connections: ["scaling", "deployment", "embeddings"]
+    },
 
-  "security": {
-    id: "security",
-    title: "Security",
-    category: "infrastructure",
-    description: "Protecting GenAI applications from threats and vulnerabilities",
-    details: `Security measures protect GenAI applications from attacks, data breaches, and misuse.
+    "security": {
+        id: "security",
+        title: "Security",
+        category: "infrastructure",
+        description: "Protecting GenAI applications from threats and vulnerabilities",
+        details: `Security measures protect GenAI applications from attacks, data breaches, and misuse.
 
 **Threat Vectors:**
 
@@ -747,29 +747,29 @@ Combining semantic and keyword search:
 - Prompt armor/shields
 - DLP solutions
 - WAF (Web Application Firewall)`,
-    connections: ["guardrails", "deployment", "monitoring"]
-  }
+        connections: ["guardrails", "deployment", "monitoring"]
+    }
 };
 
 const defaultCategories = {
-  core: {
-    id: "core",
-    name: "Core Components",
-    color: "#3B82F6",
-    description: "Fundamental building blocks of GenAI applications"
-  },
-  advanced: {
-    id: "advanced",
-    name: "Advanced Patterns",
-    color: "#8B5CF6",
-    description: "Sophisticated techniques for complex use cases"
-  },
-  infrastructure: {
-    id: "infrastructure",
-    name: "Infrastructure & Operations",
-    color: "#10B981",
-    description: "Production deployment and operational concerns"
-  }
+    core: {
+        id: "core",
+        name: "Core Components",
+        color: "#3B82F6",
+        description: "Fundamental building blocks of GenAI applications"
+    },
+    advanced: {
+        id: "advanced",
+        name: "Advanced Patterns",
+        color: "#8B5CF6",
+        description: "Sophisticated techniques for complex use cases"
+    },
+    infrastructure: {
+        id: "infrastructure",
+        name: "Infrastructure & Operations",
+        color: "#10B981",
+        description: "Production deployment and operational concerns"
+    }
 };
 
 /**
@@ -777,17 +777,17 @@ const defaultCategories = {
  * @returns {Object} Architecture components object
  */
 export function loadArchitectureComponents() {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEYS.ARCHITECTURE_COMPONENTS);
-    if (stored) {
-      return JSON.parse(stored);
+    try {
+        const stored = localStorage.getItem(STORAGE_KEYS.ARCHITECTURE_COMPONENTS);
+        if (stored) {
+            return JSON.parse(stored);
+        }
+    } catch (error) {
+        console.warn('Failed to load architecture components from localStorage:', error);
     }
-  } catch (error) {
-    console.warn('Failed to load architecture components from localStorage:', error);
-  }
-  
-  // Return default data if nothing in localStorage or error occurred
-  return defaultArchitectureComponents;
+
+    // Return default data if nothing in localStorage or error occurred
+    return defaultArchitectureComponents;
 }
 
 /**
@@ -795,13 +795,13 @@ export function loadArchitectureComponents() {
  * @param {Object} components - Architecture components object
  */
 export function saveArchitectureComponents(components) {
-  try {
-    localStorage.setItem(STORAGE_KEYS.ARCHITECTURE_COMPONENTS, JSON.stringify(components));
-    return true;
-  } catch (error) {
-    console.error('Failed to save architecture components to localStorage:', error);
-    return false;
-  }
+    try {
+        localStorage.setItem(STORAGE_KEYS.ARCHITECTURE_COMPONENTS, JSON.stringify(components));
+        return true;
+    } catch (error) {
+        console.error('Failed to save architecture components to localStorage:', error);
+        return false;
+    }
 }
 
 /**
@@ -809,17 +809,17 @@ export function saveArchitectureComponents(components) {
  * @returns {Object} Categories object
  */
 export function loadCategories() {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEYS.CATEGORIES);
-    if (stored) {
-      return JSON.parse(stored);
+    try {
+        const stored = localStorage.getItem(STORAGE_KEYS.CATEGORIES);
+        if (stored) {
+            return JSON.parse(stored);
+        }
+    } catch (error) {
+        console.warn('Failed to load categories from localStorage:', error);
     }
-  } catch (error) {
-    console.warn('Failed to load categories from localStorage:', error);
-  }
-  
-  // Return default data if nothing in localStorage or error occurred
-  return defaultCategories;
+
+    // Return default data if nothing in localStorage or error occurred
+    return defaultCategories;
 }
 
 /**
@@ -827,13 +827,13 @@ export function loadCategories() {
  * @param {Object} categories - Categories object
  */
 export function saveCategories(categories) {
-  try {
-    localStorage.setItem(STORAGE_KEYS.CATEGORIES, JSON.stringify(categories));
-    return true;
-  } catch (error) {
-    console.error('Failed to save categories to localStorage:', error);
-    return false;
-  }
+    try {
+        localStorage.setItem(STORAGE_KEYS.CATEGORIES, JSON.stringify(categories));
+        return true;
+    } catch (error) {
+        console.error('Failed to save categories to localStorage:', error);
+        return false;
+    }
 }
 
 /**
@@ -841,9 +841,9 @@ export function saveCategories(categories) {
  * @param {Object} component - Component object with id, title, category, description, details, connections
  */
 export function updateComponent(component) {
-  const components = loadArchitectureComponents();
-  components[component.id] = component;
-  return saveArchitectureComponents(components);
+    const components = loadArchitectureComponents();
+    components[component.id] = component;
+    return saveArchitectureComponents(components);
 }
 
 /**
@@ -851,9 +851,9 @@ export function updateComponent(component) {
  * @param {string} componentId - ID of the component to remove
  */
 export function removeComponent(componentId) {
-  const components = loadArchitectureComponents();
-  delete components[componentId];
-  return saveArchitectureComponents(components);
+    const components = loadArchitectureComponents();
+    delete components[componentId];
+    return saveArchitectureComponents(components);
 }
 
 /**
@@ -861,9 +861,9 @@ export function removeComponent(componentId) {
  * @param {Object} category - Category object with id, name, color, description
  */
 export function updateCategory(category) {
-  const categories = loadCategories();
-  categories[category.id] = category;
-  return saveCategories(categories);
+    const categories = loadCategories();
+    categories[category.id] = category;
+    return saveCategories(categories);
 }
 
 /**
@@ -871,31 +871,31 @@ export function updateCategory(category) {
  * @param {string} categoryId - ID of the category to remove
  */
 export function removeCategory(categoryId) {
-  const categories = loadCategories();
-  delete categories[categoryId];
-  return saveCategories(categories);
+    const categories = loadCategories();
+    delete categories[categoryId];
+    return saveCategories(categories);
 }
 
 /**
  * Initialize localStorage with default data if it's empty
  */
 export function initializeStorage() {
-  // Check if localStorage is empty and initialize with defaults
-  if (!localStorage.getItem(STORAGE_KEYS.ARCHITECTURE_COMPONENTS)) {
-    saveArchitectureComponents(defaultArchitectureComponents);
-  }
-  
-  if (!localStorage.getItem(STORAGE_KEYS.CATEGORIES)) {
-    saveCategories(defaultCategories);
-  }
+    // Check if localStorage is empty and initialize with defaults
+    if (!localStorage.getItem(STORAGE_KEYS.ARCHITECTURE_COMPONENTS)) {
+        saveArchitectureComponents(defaultArchitectureComponents);
+    }
+
+    if (!localStorage.getItem(STORAGE_KEYS.CATEGORIES)) {
+        saveCategories(defaultCategories);
+    }
 }
 
 /**
  * Reset storage to default values
  */
 export function resetToDefaults() {
-  saveArchitectureComponents(defaultArchitectureComponents);
-  saveCategories(defaultCategories);
+    saveArchitectureComponents(defaultArchitectureComponents);
+    saveCategories(defaultCategories);
 }
 
 /**
@@ -903,11 +903,11 @@ export function resetToDefaults() {
  * @returns {Object} Complete data export
  */
 export function exportData() {
-  return {
-    components: loadArchitectureComponents(),
-    categories: loadCategories(),
-    exportDate: new Date().toISOString()
-  };
+    return {
+        components: loadArchitectureComponents(),
+        categories: loadCategories(),
+        exportDate: new Date().toISOString()
+    };
 }
 
 /**
@@ -915,16 +915,16 @@ export function exportData() {
  * @param {Object} data - Data object with components and categories
  */
 export function importData(data) {
-  try {
-    if (data.components) {
-      saveArchitectureComponents(data.components);
+    try {
+        if (data.components) {
+            saveArchitectureComponents(data.components);
+        }
+        if (data.categories) {
+            saveCategories(data.categories);
+        }
+        return true;
+    } catch (error) {
+        console.error('Failed to import data:', error);
+        return false;
     }
-    if (data.categories) {
-      saveCategories(data.categories);
-    }
-    return true;
-  } catch (error) {
-    console.error('Failed to import data:', error);
-    return false;
-  }
 }

@@ -1,7 +1,7 @@
-import { 
-  loadArchitectureComponents, 
-  loadCategories, 
-  initializeStorage 
+import {
+   loadArchitectureComponents,
+   loadCategories,
+   initializeStorage
 } from '../utils/storageUtils.js';
 
 // Initialize storage with default data if empty
