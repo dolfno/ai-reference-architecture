@@ -35,7 +35,7 @@ const defaultArchitectureComponents = {
 - Summarization
 - Translation
 - Code generation`,
-        connections: ["embeddings", "prompt-engineering", "fine-tuning"]
+        connections: ["llm-models", "prompt-engineering", "fine-tuning", "output-structurer"]
     },
 
     "embeddings": {
@@ -62,7 +62,7 @@ const defaultArchitectureComponents = {
 - Clustering and classification
 - Recommendation systems
 - RAG (Retrieval Augmented Generation)`,
-        connections: ["vector-db", "rag", "semantic-search"]
+        connections: ["vector-db", "rag", "semantic-search", "reranker", "keyword-search"]
     },
 
     "vector-db": {
@@ -152,7 +152,7 @@ const defaultArchitectureComponents = {
 - Multi-query RAG: Multiple retrieval strategies
 - Agentic RAG: With reasoning and tool use
 - GraphRAG: Using knowledge graphs`,
-        connections: ["vector-db", "embeddings", "llm-models", "agents"]
+        connections: ["vector-db", "embeddings", "llm-models", "agents", "reranker", "chunker", "knowledge-graph"]
     },
 
     "agents": {
@@ -189,7 +189,7 @@ const defaultArchitectureComponents = {
 - Data analysis automation
 - Code generation and debugging
 - Customer support automation`,
-        connections: ["llm-models", "rag", "function-calling", "orchestration"]
+        connections: ["llm-models", "rag", "function-calling", "orchestration", "query-routing", "sliding-context-window"]
     },
 
     "function-calling": {
@@ -397,7 +397,7 @@ Combining semantic and keyword search:
 - Store in vector database
 - Embed queries in real-time
 - Return top-K similar documents`,
-        connections: ["embeddings", "vector-db", "rag"]
+        connections: ["embeddings", "vector-db", "rag", "reranker", "keyword-search", "chunker"]
     },
 
     "orchestration": {
@@ -494,7 +494,7 @@ Combining semantic and keyword search:
 - Unstructured.io
 - LangChain document loaders
 - LlamaIndex data connectors`,
-        connections: ["embeddings", "vector-db", "fine-tuning"]
+        connections: ["embeddings", "vector-db", "fine-tuning", "chunker", "entity-extraction"]
     },
 
     "monitoring": {
@@ -748,6 +748,760 @@ Combining semantic and keyword search:
 - DLP solutions
 - WAF (Web Application Firewall)`,
         connections: ["guardrails", "deployment", "monitoring"]
+    },
+
+    "reranker": {
+        id: "reranker",
+        title: "Reranker Model",
+        category: "core",
+        description: "Models that reorder search results to improve relevance",
+        details: `Reranker models take an initial set of retrieved documents and reorder them to improve relevance for the given query.
+
+**How Reranking Works:**
+1. Initial retrieval (e.g., vector search) gets top-K candidates
+2. Reranker model scores each candidate against the query
+3. Results are reordered based on reranker scores
+4. Top results are returned or passed to next stage
+
+**Types of Rerankers:**
+
+1. **Cross-Encoder Models**:
+   - Process query and document together
+   - More accurate but slower
+   - Examples: BGE reranker, Cohere rerank
+
+2. **Bi-Encoder Models**:
+   - Encode query and document separately
+   - Faster but less accurate
+   - Can pre-compute document embeddings
+
+3. **LLM-based Rerankers**:
+   - Use instruction-tuned LLMs
+   - Highly flexible
+   - Can provide reasoning
+
+**Popular Models:**
+- Cohere Rerank API
+- BGE (BAAI General Embedding) reranker
+- MS MARCO models
+- ColBERT
+- MonoT5/DuoT5
+
+**Benefits:**
+- Significantly improves retrieval quality
+- Reduces false positives
+- Better handles semantic nuances
+- Can incorporate multiple relevance signals
+
+**Use Cases:**
+- RAG pipeline improvement
+- Search result optimization
+- Document ranking
+- Question answering systems`,
+        connections: ["embeddings", "rag", "semantic-search", "vector-db"]
+    },
+
+    "community-detection": {
+        id: "community-detection",
+        title: "Community Detection",
+        category: "advanced",
+        description: "Graph algorithms for identifying clusters of related entities",
+        details: `Community detection algorithms identify groups of densely connected nodes in graphs, useful for discovering related concepts or entities.
+
+**Core Algorithms:**
+
+1. **Modularity-based**:
+   - Louvain algorithm
+   - Leiden algorithm
+   - Fast greedy modularity
+
+2. **Random Walk-based**:
+   - Walktrap
+   - Infomap
+   - Label propagation
+
+3. **Spectral Methods**:
+   - Spectral clustering
+   - Normalized cuts
+
+4. **Hierarchical Methods**:
+   - Hierarchical clustering
+   - Dendrogram-based
+
+**Applications in GenAI:**
+
+- **Knowledge Graph Analysis**:
+  - Topic clustering
+  - Entity grouping
+  - Concept hierarchies
+
+- **Document Organization**:
+  - Content clustering
+  - Theme identification
+  - Information architecture
+
+- **Recommendation Systems**:
+  - User segmentation
+  - Content grouping
+  - Collaborative filtering
+
+**Implementation:**
+- NetworkX (Python)
+- igraph (R/Python)
+- Neo4j graph algorithms
+- DGL (Deep Graph Library)
+
+**Metrics:**
+- Modularity score
+- Silhouette coefficient
+- Conductance
+- Coverage and performance`,
+        connections: ["knowledge-graph", "relationship-extraction", "entity-extraction"]
+    },
+
+    "relationship-extraction": {
+        id: "relationship-extraction",
+        title: "Relationship Extraction",
+        category: "advanced",
+        description: "NLP techniques for identifying relationships between entities",
+        details: `Relationship extraction identifies and classifies semantic relationships between entities in text.
+
+**Relationship Types:**
+
+1. **Semantic Relations**:
+   - Is-a (hypernym/hyponym)
+   - Part-of (meronym/holonym)
+   - Cause-effect
+   - Temporal relations
+
+2. **Named Entity Relations**:
+   - Person-Organization
+   - Location-Event
+   - Product-Company
+   - Author-Work
+
+**Approaches:**
+
+1. **Rule-based**:
+   - Pattern matching
+   - Dependency parsing
+   - Syntactic rules
+   - Regex patterns
+
+2. **Machine Learning**:
+   - Supervised classification
+   - Distant supervision
+   - Few-shot learning
+   - Transfer learning
+
+3. **LLM-based**:
+   - Zero-shot extraction
+   - Few-shot prompting
+   - Chain-of-thought reasoning
+   - Structured output generation
+
+**Tools and Libraries:**
+- spaCy relation extraction
+- OpenIE (Stanford)
+- AllenNLP
+- Hugging Face transformers
+- Custom LLM prompts
+
+**Output Formats:**
+- Triple format (subject, predicate, object)
+- JSON schemas
+- Knowledge graphs
+- Structured databases
+
+**Applications:**
+- Knowledge base construction
+- Information extraction
+- Question answering
+- Content understanding`,
+        connections: ["entity-extraction", "knowledge-graph", "llm-models", "community-detection"]
+    },
+
+    "entity-extraction": {
+        id: "entity-extraction",
+        title: "Entity Extraction",
+        category: "advanced",
+        description: "NLP technique for identifying and classifying named entities",
+        details: `Entity extraction (Named Entity Recognition - NER) identifies and classifies named entities in text into predefined categories.
+
+**Standard Entity Types:**
+
+1. **Core Categories**:
+   - PERSON (names of people)
+   - ORGANIZATION (companies, institutions)
+   - LOCATION (countries, cities, addresses)
+   - DATE/TIME (temporal expressions)
+
+2. **Extended Categories**:
+   - MONEY (monetary values)
+   - PERCENTAGE (percentages)
+   - PRODUCT (commercial products)
+   - EVENT (named events)
+   - LANGUAGE (spoken languages)
+
+**Approaches:**
+
+1. **Traditional NLP**:
+   - Rule-based systems
+   - CRF (Conditional Random Fields)
+   - HMM (Hidden Markov Models)
+   - Feature engineering
+
+2. **Deep Learning**:
+   - BiLSTM-CRF
+   - BERT-based models
+   - spaCy models
+   - Fine-tuned transformers
+
+3. **LLM-based**:
+   - Zero-shot extraction
+   - Few-shot prompting
+   - Structured output
+   - Custom entity types
+
+**Tools:**
+- spaCy NER models
+- Stanford NER
+- Hugging Face NER models
+- AWS Comprehend
+- Google Cloud NLP
+- Azure Text Analytics
+
+**Custom Entity Extraction:**
+- Domain-specific entities
+- Custom training data
+- Active learning
+- Weak supervision
+
+**Applications:**
+- Information extraction
+- Content categorization
+- Search enhancement
+- Knowledge graph population`,
+        connections: ["relationship-extraction", "knowledge-graph", "llm-models", "data-pipeline"]
+    },
+
+    "query-routing": {
+        id: "query-routing",
+        title: "Query Routing",
+        category: "advanced",
+        description: "Directing queries to appropriate models or systems based on intent",
+        details: `Query routing intelligently directs user queries to the most appropriate model, system, or processing pipeline based on query characteristics and intent.
+
+**Routing Strategies:**
+
+1. **Intent-based Routing**:
+   - Classify query intent
+   - Route to specialized models
+   - Task-specific optimization
+   - Multi-intent handling
+
+2. **Complexity-based Routing**:
+   - Simple queries → fast/cheap models
+   - Complex queries → powerful models
+   - Cascading approach
+   - Cost optimization
+
+3. **Domain-based Routing**:
+   - Subject matter classification
+   - Domain-specific models
+   - Specialized knowledge bases
+   - Expert system routing
+
+4. **Performance-based Routing**:
+   - Load balancing
+   - Response time optimization
+   - Model availability
+   - Quality thresholds
+
+**Implementation Approaches:**
+
+1. **Rule-based Routing**:
+   - Keyword matching
+   - Pattern recognition
+   - Heuristic rules
+   - Decision trees
+
+2. **ML-based Routing**:
+   - Intent classification models
+   - Embedding similarity
+   - Multi-class classification
+   - Confidence scoring
+
+3. **LLM-based Routing**:
+   - Zero-shot classification
+   - Chain-of-thought routing
+   - Structured decision making
+   - Dynamic routing logic
+
+**Benefits:**
+- Cost optimization
+- Improved response quality
+- Better resource utilization
+- Specialized handling
+
+**Use Cases:**
+- Multi-model systems
+- Hybrid AI architectures
+- Customer support routing
+- Content recommendation`,
+        connections: ["llm-models", "agents", "orchestration", "evaluation"]
+    },
+
+    "llm-graph-creator": {
+        id: "llm-graph-creator",
+        title: "LLM Graph Creator",
+        category: "advanced",
+        description: "Tools for creating knowledge graphs using Large Language Models",
+        details: `LLM Graph Creator systems use Large Language Models to automatically construct and populate knowledge graphs from unstructured text.
+
+**Graph Creation Process:**
+
+1. **Entity Identification**:
+   - Extract entities from text
+   - Resolve entity mentions
+   - Entity linking and disambiguation
+   - Type classification
+
+2. **Relationship Discovery**:
+   - Identify semantic relationships
+   - Extract relationship properties
+   - Temporal and spatial relations
+   - Confidence scoring
+
+3. **Graph Construction**:
+   - Node creation and properties
+   - Edge creation and weights
+   - Schema alignment
+   - Consistency validation
+
+4. **Graph Refinement**:
+   - Duplicate resolution
+   - Contradiction handling
+   - Quality assessment
+   - Iterative improvement
+
+**LLM Approaches:**
+
+1. **Structured Prompting**:
+   - JSON/XML output formats
+   - Schema-guided extraction
+   - Few-shot examples
+   - Chain-of-thought reasoning
+
+2. **Multi-step Processing**:
+   - Sequential extraction
+   - Verification steps
+   - Incremental building
+   - Error correction
+
+3. **Agentic Workflows**:
+   - Planning and execution
+   - Tool integration
+   - Feedback loops
+   - Quality control
+
+**Applications:**
+- Automated knowledge base creation
+- Document understanding
+- Research synthesis
+- Content organization
+
+**Tools and Frameworks:**
+- LangChain graph constructors
+- GraphRAG implementations
+- Custom LLM pipelines
+- Neo4j + LLM integrations`,
+        connections: ["knowledge-graph", "entity-extraction", "relationship-extraction", "llm-models"]
+    },
+
+    "chunker": {
+        id: "chunker",
+        title: "Chunker",
+        category: "core",
+        description: "Text splitting strategies for optimal processing and retrieval",
+        details: `Chunkers break down large documents into smaller, manageable pieces that can be effectively processed by embeddings and language models.
+
+**Chunking Strategies:**
+
+1. **Fixed-size Chunking**:
+   - Character-based splitting
+   - Token-based splitting
+   - Sentence-based splitting
+   - Paragraph-based splitting
+
+2. **Semantic Chunking**:
+   - Topic-based segmentation
+   - Coherence-based splitting
+   - Embedding similarity
+   - Content-aware boundaries
+
+3. **Structure-aware Chunking**:
+   - Document hierarchy preservation
+   - Section and heading awareness
+   - Markdown/HTML structure
+   - Code block handling
+
+4. **Overlap Strategies**:
+   - Sliding windows
+   - Sentence overlap
+   - Contextual bridging
+   - Redundancy optimization
+
+**Advanced Techniques:**
+
+1. **Recursive Chunking**:
+   - Hierarchical decomposition
+   - Multi-level splitting
+   - Parent-child relationships
+   - Contextual inheritance
+
+2. **Adaptive Chunking**:
+   - Content-dependent sizing
+   - Quality-based adjustment
+   - Performance optimization
+   - Dynamic thresholds
+
+**Key Considerations:**
+- Chunk size vs. context preservation
+- Retrieval granularity
+- Processing efficiency
+- Semantic coherence
+- Overlap management
+
+**Tools:**
+- LangChain text splitters
+- LlamaIndex chunkers
+- Unstructured.io
+- Custom implementations
+
+**Best Practices:**
+- Preserve sentence boundaries
+- Maintain context continuity
+- Consider downstream tasks
+- Monitor chunk quality
+- Test retrieval performance`,
+        connections: ["data-pipeline", "embeddings", "rag", "semantic-search"]
+    },
+
+    "output-structurer": {
+        id: "output-structurer",
+        title: "Output Structurer",
+        category: "core",
+        description: "Tools for formatting and structuring LLM outputs",
+        details: `Output Structurer ensures LLM responses conform to specific formats, schemas, and structural requirements for downstream processing.
+
+**Structuring Approaches:**
+
+1. **Schema-based Structuring**:
+   - JSON Schema validation
+   - Pydantic models
+   - XML schemas
+   - OpenAPI specifications
+
+2. **Template-based Formatting**:
+   - Jinja2 templates
+   - Mustache templates
+   - Custom formatters
+   - Output templates
+
+3. **Grammar-guided Generation**:
+   - Context-free grammars
+   - Constrained generation
+   - Parsing rules
+   - Syntax validation
+
+4. **Post-processing Pipelines**:
+   - Regex cleaning
+   - Format conversion
+   - Validation checks
+   - Error correction
+
+**Output Formats:**
+
+1. **Structured Data**:
+   - JSON objects
+   - YAML documents
+   - CSV tables
+   - Database records
+
+2. **Markup Languages**:
+   - HTML documents
+   - Markdown text
+   - LaTeX documents
+   - XML structures
+
+3. **Code Formats**:
+   - Programming languages
+   - Configuration files
+   - API specifications
+   - Documentation
+
+**Validation and Quality:**
+- Schema compliance
+- Format validation
+- Content verification
+- Error detection
+- Quality scoring
+
+**Tools:**
+- Guardrails AI
+- Guidance (Microsoft)
+- JSONformer
+- Outlines
+- Custom validators
+
+**Use Cases:**
+- API response formatting
+- Data extraction
+- Report generation
+- Code generation
+- Form filling`,
+        connections: ["llm-models", "guardrails", "prompt-engineering", "evaluation"]
+    },
+
+    "knowledge-graph": {
+        id: "knowledge-graph",
+        title: "Knowledge Graph",
+        category: "advanced",
+        description: "Graph-based knowledge representation connecting entities and relationships",
+        details: `Knowledge Graphs represent information as networks of entities and their relationships, enabling sophisticated reasoning and knowledge discovery.
+
+**Core Components:**
+
+1. **Entities (Nodes)**:
+   - Real-world objects, concepts, events
+   - Unique identifiers
+   - Type classifications
+   - Properties and attributes
+
+2. **Relations (Edges)**:
+   - Semantic connections
+   - Typed relationships
+   - Directional or bidirectional
+   - Relationship properties
+
+3. **Schema/Ontology**:
+   - Entity types hierarchy
+   - Relationship definitions
+   - Constraints and rules
+   - Domain vocabularies
+
+**Knowledge Graph Types:**
+
+1. **Enterprise KGs**:
+   - Internal company knowledge
+   - Business entities and processes
+   - Organizational relationships
+   - Domain-specific information
+
+2. **General Knowledge KGs**:
+   - DBpedia, Wikidata
+   - Freebase, YAGO
+   - ConceptNet
+   - WordNet
+
+3. **Domain-specific KGs**:
+   - Scientific knowledge (PubMed)
+   - Financial relationships
+   - Legal entities
+   - Medical ontologies
+
+**Construction Methods:**
+
+1. **Manual Curation**:
+   - Expert knowledge entry
+   - Structured data import
+   - Quality control
+   - Validation processes
+
+2. **Automated Extraction**:
+   - Entity and relation extraction
+   - Web scraping
+   - Document processing
+   - LLM-based generation
+
+**Query and Reasoning:**
+- SPARQL queries
+- Graph traversal
+- Pattern matching
+- Inference rules
+- Graph algorithms
+
+**Applications:**
+- Question answering
+- Recommendation systems
+- Semantic search
+- Research discovery
+- Content understanding
+
+**Technologies:**
+- Neo4j, ArangoDB
+- Amazon Neptune
+- GraphDB, Stardog
+- RDF stores (Jena, Virtuoso)`,
+        connections: ["entity-extraction", "relationship-extraction", "llm-graph-creator", "community-detection"]
+    },
+
+    "keyword-search": {
+        id: "keyword-search",
+        title: "Keyword Search",
+        category: "core",
+        description: "Traditional text search using lexical matching (BM25, TF-IDF, trigrams)",
+        details: `Keyword search finds documents based on exact word matches and lexical similarity, complementing semantic search approaches.
+
+**Search Algorithms:**
+
+1. **BM25 (Best Matching 25)**:
+   - Probabilistic ranking function
+   - Term frequency and document frequency
+   - Document length normalization
+   - Industry standard for text search
+
+2. **TF-IDF (Term Frequency-Inverse Document Frequency)**:
+   - Statistical measure of importance
+   - Balances term frequency with rarity
+   - Classic information retrieval method
+   - Foundation for many search systems
+
+3. **N-gram Matching**:
+   - Character-level n-grams (trigrams, etc.)
+   - Fuzzy matching capabilities
+   - Typo tolerance
+   - Substring matching
+
+4. **Boolean Search**:
+   - AND, OR, NOT operators
+   - Exact phrase matching
+   - Proximity operators
+   - Complex query expressions
+
+**Advanced Features:**
+
+1. **Query Processing**:
+   - Stemming and lemmatization
+   - Stop word removal
+   - Synonym expansion
+   - Query rewriting
+
+2. **Ranking and Scoring**:
+   - Relevance scoring
+   - Boosting factors
+   - Field weighting
+   - Custom scoring functions
+
+3. **Filtering and Faceting**:
+   - Metadata filtering
+   - Date range filters
+   - Category facets
+   - Dynamic faceting
+
+**Search Engines:**
+- Elasticsearch
+- Apache Solr
+- Amazon OpenSearch
+- Azure Cognitive Search
+- Whoosh (Python)
+
+**Hybrid Search:**
+Combining keyword and semantic search:
+- Weighted score fusion
+- Reciprocal rank fusion
+- Learning to rank
+- Query-dependent weighting
+
+**Use Cases:**
+- Document search
+- E-commerce search
+- Legal document retrieval
+- News and media search
+- Enterprise search`,
+        connections: ["semantic-search", "rag", "vector-db", "reranker"]
+    },
+
+    "sliding-context-window": {
+        id: "sliding-context-window",
+        title: "Sliding Context Window",
+        category: "advanced",
+        description: "Dynamic context management for long conversations and documents",
+        details: `Sliding Context Window manages limited context space in language models by dynamically selecting and updating relevant information as conversations or documents progress.
+
+**Context Window Challenges:**
+
+1. **Token Limitations**:
+   - Fixed context length (2K-200K+ tokens)
+   - Computational cost scaling
+   - Memory constraints
+   - Processing latency
+
+2. **Information Management**:
+   - Relevance prioritization
+   - Historical context preservation
+   - Recent information emphasis
+   - Context coherence maintenance
+
+**Sliding Window Strategies:**
+
+1. **FIFO (First In, First Out)**:
+   - Remove oldest content
+   - Simple implementation
+   - May lose important context
+   - Suitable for temporal data
+
+2. **Relevance-based Sliding**:
+   - Score content importance
+   - Retain high-relevance segments
+   - Dynamic priority adjustment
+   - Context-aware selection
+
+3. **Hierarchical Context**:
+   - Multi-level summarization
+   - Abstract representations
+   - Nested context layers
+   - Granular detail management
+
+4. **Attention-guided Sliding**:
+   - Attention weight analysis
+   - Focus on attended content
+   - Adaptive window sizing
+   - Model-driven selection
+
+**Implementation Approaches:**
+
+1. **Static Windows**:
+   - Fixed window size
+   - Regular advancement
+   - Predictable behavior
+   - Simple management
+
+2. **Dynamic Windows**:
+   - Adaptive window sizing
+   - Content-dependent boundaries
+   - Variable advancement
+   - Optimized retention
+
+3. **Overlapping Windows**:
+   - Context continuity
+   - Smooth transitions
+   - Redundancy management
+   - Coherence preservation
+
+**Advanced Techniques:**
+- Context compression
+- Summarization integration
+- Memory augmentation
+- External memory systems
+
+**Applications:**
+- Long document processing
+- Extended conversations
+- Streaming data analysis
+- Real-time interactions`,
+        connections: ["llm-models", "rag", "orchestration", "agents"]
     }
 };
 
