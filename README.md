@@ -19,6 +19,9 @@ This application provides an interactive, visual reference guide to GenAI archit
 - **Interactive Architecture Diagram**: Explore components and their relationships visually using ReactFlow
 - **Detailed Component Information**: Click any component to view comprehensive explanations, use cases, and best practices
 - **Connected Learning**: Navigate between related components to understand how they work together
+- **Dynamic Data Management**: Add, edit, and customize components through the built-in data manager
+- **Local Storage Persistence**: All customizations are saved locally in your browser
+- **Data Import/Export**: Backup and share your custom architecture data
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Beautiful UI**: Modern, gradient-based design with smooth animations
 
@@ -65,9 +68,13 @@ ai-reference-architecture/
 │   │   ├── ArchitectureDiagram.jsx    # Interactive diagram component
 │   │   ├── ArchitectureDiagram.css
 │   │   ├── ComponentDetail.jsx         # Detail panel for components
-│   │   └── ComponentDetail.css
+│   │   ├── ComponentDetail.css
+│   │   ├── DataManager.jsx            # Data management interface
+│   │   └── DataManager.css
 │   ├── data/
-│   │   └── architectureData.js         # All component data and relationships
+│   │   └── architectureData.js         # Dynamic data loading
+│   ├── utils/
+│   │   └── storageUtils.js             # LocalStorage utilities
 │   ├── App.jsx                          # Main application component
 │   ├── App.css
 │   ├── main.jsx                         # Entry point
@@ -114,19 +121,39 @@ ai-reference-architecture/
 
 ## Customization
 
-### Adding New Components
+### Dynamic Data Management
 
-Edit `src/data/architectureData.js` to add new components:
+The application now includes a built-in data manager accessible via the "Manage Data" button in the header. This allows you to:
+
+- **Add New Components**: Create custom architecture components
+- **Edit Existing Components**: Modify titles, descriptions, details, and connections
+- **Delete Components**: Remove components you don't need
+- **Manage Categories**: Create and customize component categories
+- **Import/Export Data**: Backup and share your custom architecture data
+- **Reset to Defaults**: Restore the original component set
+
+All changes are automatically saved to localStorage and persist between browser sessions.
+
+### Manual Data Editing
+
+You can still manually edit the default data in `src/utils/storageUtils.js` by modifying the `defaultArchitectureComponents` and `defaultCategories` objects.
+
+### Adding Components Programmatically
+
+Use the storage utilities in your code:
 
 ```javascript
-"new-component": {
+import { updateComponent, loadArchitectureComponents } from './src/utils/storageUtils.js';
+
+// Add a new component
+updateComponent({
   id: "new-component",
   title: "New Component",
-  category: "core", // or "advanced" or "infrastructure"
+  category: "core",
   description: "Brief description",
-  details: `Detailed information with markdown-like formatting...`,
-  connections: ["related-component-1", "related-component-2"]
-}
+  details: `Detailed information...`,
+  connections: ["related-component-1"]
+});
 ```
 
 ### Styling
@@ -163,17 +190,19 @@ Contributions are welcome! To contribute:
 4. Submit a pull request
 
 Areas for contribution:
-- Adding more components
+- Adding more components through the data manager
 - Improving component descriptions
 - Adding code examples
 - Enhancing visualizations
+- Adding new categories
+- Improving the data management interface
 - Fixing bugs
 
 ## Future Enhancements
 
 Potential improvements:
 - [ ] Code examples for each component
-- [ ] Search functionality
+- [ ] Search functionality within the data manager
 - [ ] Filter by category
 - [ ] Export diagram as image
 - [ ] Dark mode
@@ -182,6 +211,8 @@ Potential improvements:
 - [ ] Video tutorials
 - [ ] Cost calculators
 - [ ] Community-contributed patterns
+- [ ] Component versioning
+- [ ] Collaborative editing
 
 ## License
 

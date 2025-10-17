@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import ArchitectureDiagram from './components/ArchitectureDiagram';
 import ComponentDetail from './components/ComponentDetail';
-import { Brain, Github, BookOpen } from 'lucide-react';
+import DataManager from './components/DataManager';
+import { Brain, Github, BookOpen, Settings } from 'lucide-react';
 import './App.css';
 
 function App() {
   const [selectedComponent, setSelectedComponent] = useState(null);
+  const [showDataManager, setShowDataManager] = useState(false);
+  const [dataVersion, setDataVersion] = useState(0); // Force re-render when data changes
 
   const handleNodeClick = (componentId) => {
     setSelectedComponent(componentId);
@@ -17,6 +20,15 @@ function App() {
 
   const handleNavigate = (componentId) => {
     setSelectedComponent(componentId);
+  };
+
+  const handleDataChange = () => {
+    // Force components to reload data by updating version
+    setDataVersion(prev => prev + 1);
+  };
+
+  const toggleDataManager = () => {
+    setShowDataManager(!showDataManager);
   };
 
   return (
@@ -32,6 +44,14 @@ function App() {
           </p>
         </div>
         <div className="header-actions">
+          <button
+            onClick={toggleDataManager}
+            className="header-link header-button"
+            title="Manage Architecture Data"
+          >
+            <Settings size={20} />
+            <span>Manage Data</span>
+          </button>
           <a
             href="https://github.com"
             target="_blank"
@@ -45,63 +65,82 @@ function App() {
       </header>
 
       <div className="app-content">
-        <aside className="sidebar">
-          <div className="sidebar-section">
-            <h3 className="sidebar-title">
-              <BookOpen size={18} />
-              How to Use
-            </h3>
-            <ul className="sidebar-list">
-              <li>Click on any component to view detailed information</li>
-              <li>Explore connections between related components</li>
-              <li>Use the minimap to navigate the architecture</li>
-              <li>Zoom and pan to explore different areas</li>
-            </ul>
-          </div>
-
-          <div className="sidebar-section">
-            <h3 className="sidebar-title">Categories</h3>
-            <div className="category-legend">
-              <div className="legend-item">
-                <span className="legend-color" style={{ background: '#3B82F6' }}></span>
-                <span>Core Components</span>
-              </div>
-              <div className="legend-item">
-                <span className="legend-color" style={{ background: '#8B5CF6' }}></span>
-                <span>Advanced Patterns</span>
-              </div>
-              <div className="legend-item">
-                <span className="legend-color" style={{ background: '#10B981' }}></span>
-                <span>Infrastructure</span>
-              </div>
+        {showDataManager ? (
+          <div className="data-manager-overlay">
+            <div className="data-manager-container">
+              <button 
+                onClick={toggleDataManager}
+                className="close-data-manager"
+                title="Close Data Manager"
+              >
+                ×
+              </button>
+              <DataManager onDataChange={handleDataChange} />
             </div>
           </div>
+        ) : (
+          <>
+            <aside className="sidebar">
+              <div className="sidebar-section">
+                <h3 className="sidebar-title">
+                  <BookOpen size={18} />
+                  How to Use
+                </h3>
+                <ul className="sidebar-list">
+                  <li>Click on any component to view detailed information</li>
+                  <li>Explore connections between related components</li>
+                  <li>Use the minimap to navigate the architecture</li>
+                  <li>Zoom and pan to explore different areas</li>
+                  <li>Use "Manage Data" to customize components</li>
+                </ul>
+              </div>
 
-          <div className="sidebar-section">
-            <h3 className="sidebar-title">Coverage</h3>
-            <ul className="sidebar-list small">
-              <li>LLMs & Embeddings</li>
-              <li>Vector Databases</li>
-              <li>RAG & Semantic Search</li>
-              <li>AI Agents & Orchestration</li>
-              <li>Fine-tuning & Evaluation</li>
-              <li>Deployment & Scaling</li>
-              <li>Security & Monitoring</li>
-            </ul>
-          </div>
-        </aside>
+              <div className="sidebar-section">
+                <h3 className="sidebar-title">Categories</h3>
+                <div className="category-legend">
+                  <div className="legend-item">
+                    <span className="legend-color" style={{ background: '#3B82F6' }}></span>
+                    <span>Core Components</span>
+                  </div>
+                  <div className="legend-item">
+                    <span className="legend-color" style={{ background: '#8B5CF6' }}></span>
+                    <span>Advanced Patterns</span>
+                  </div>
+                  <div className="legend-item">
+                    <span className="legend-color" style={{ background: '#10B981' }}></span>
+                    <span>Infrastructure</span>
+                  </div>
+                </div>
+              </div>
 
-        <main className="main-content">
-          <div className="diagram-container">
-            <ArchitectureDiagram onNodeClick={handleNodeClick} />
-          </div>
-        </main>
+              <div className="sidebar-section">
+                <h3 className="sidebar-title">Coverage</h3>
+                <ul className="sidebar-list small">
+                  <li>LLMs & Embeddings</li>
+                  <li>Vector Databases</li>
+                  <li>RAG & Semantic Search</li>
+                  <li>AI Agents & Orchestration</li>
+                  <li>Fine-tuning & Evaluation</li>
+                  <li>Deployment & Scaling</li>
+                  <li>Security & Monitoring</li>
+                </ul>
+              </div>
+            </aside>
+
+            <main className="main-content">
+              <div className="diagram-container">
+                <ArchitectureDiagram key={dataVersion} onNodeClick={handleNodeClick} />
+              </div>
+            </main>
+          </>
+        )}
       </div>
 
       <ComponentDetail
         componentId={selectedComponent}
         onClose={handleCloseDetail}
         onNavigate={handleNavigate}
+        key={`${selectedComponent}-${dataVersion}`} // Force refresh when data changes
       />
 
       <footer className="app-footer">

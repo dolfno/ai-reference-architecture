@@ -8,10 +8,13 @@ import ReactFlow, {
   MarkerType,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import { architectureComponents, categories } from '../data/architectureData';
+import { loadArchitectureComponents, loadCategories } from '../utils/storageUtils';
 import './ArchitectureDiagram.css';
 
 const ArchitectureDiagram = ({ onNodeClick }) => {
+  // Load data dynamically each time component renders
+  const architectureComponents = loadArchitectureComponents();
+  const categories = loadCategories();
   // Create nodes from architecture data
   const initialNodes = useMemo(() => {
     const nodesByCategory = {
@@ -86,10 +89,13 @@ const ArchitectureDiagram = ({ onNodeClick }) => {
           border: 'none',
           borderRadius: '8px',
           padding: '10px 20px',
-          fontSize: '16px',
+          fontSize: '14px',
           fontWeight: 'bold',
           boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
           pointerEvents: 'none',
+          width: 'auto',
+          minWidth: '160px',
+          textAlign: 'center',
         },
         draggable: false,
       });

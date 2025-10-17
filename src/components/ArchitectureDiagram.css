@@ -17,7 +17,9 @@
 
 .category-label {
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.2;
 }
 
 .react-flow__node {

@@ -1,10 +1,14 @@
 import React from 'react';
 import { X, Tag, Network } from 'lucide-react';
-import { architectureComponents, categories } from '../data/architectureData';
+import { loadArchitectureComponents, loadCategories } from '../utils/storageUtils';
 import './ComponentDetail.css';
 
 const ComponentDetail = ({ componentId, onClose, onNavigate }) => {
   if (!componentId) return null;
+
+  // Load data dynamically each time component renders
+  const architectureComponents = loadArchitectureComponents();
+  const categories = loadCategories();
 
   const component = architectureComponents[componentId];
   if (!component) return null;
