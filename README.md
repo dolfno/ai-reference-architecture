@@ -35,6 +35,45 @@ This application provides an interactive, visual reference guide to GenAI archit
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Beautiful UI**: Modern, gradient-based design with smooth animations
 
+## Use Cases & User Stories
+
+### Use Case 1: Learning & Education
+
+#### Business User Stories
+- **As a product manager**, I want to explore the high-level AI architecture overview so I can understand how different components impact business outcomes and user experience
+- **As a business stakeholder**, I want to see how components connect and work together so I can identify potential bottlenecks and optimization opportunities
+- **As a project manager**, I want to understand the relationships between AI components so I can better scope projects and allocate resources
+- **As a non-technical executive**, I want to grasp the purpose and value of each AI component so I can make informed strategic decisions
+
+#### Technical User Stories
+- **As a software engineer**, I want to drill deep into specific components so I can understand implementation details and integration patterns
+- **As a data scientist**, I want to explore technical specifications and parameters of AI models so I can optimize performance for my use case
+- **As a DevOps engineer**, I want to understand infrastructure requirements and scaling considerations so I can design robust deployment strategies
+- **As an AI researcher**, I want to access detailed algorithmic explanations and performance characteristics so I can evaluate components for my research
+
+#### Learning Navigation Stories
+- **As a learner**, I want to follow connected learning paths between related components so I can build comprehensive understanding
+- **As a business user**, I want to stay at the overview level and see system-wide flows so I can understand the big picture without getting overwhelmed by technical details
+- **As a technical expert**, I want quick access to deep-dive sections and implementation examples so I can efficiently find the specific information I need
+
+### Use Case 2: Architecture Design & Planning
+
+#### Architect/Designer User Stories
+- **As a solution architect**, I want to drag and drop components to design a custom AI architecture so I can visualize the solution before implementation
+- **As a technical lead**, I want to map out the flow and connections between components for a specific use case (e.g., chatbot, content generation, document analysis) so I can create implementation blueprints
+- **As an AI engineer**, I want to select appropriate components based on my use case requirements so I can build an optimal architecture
+- **As a system designer**, I want to validate that my component connections make technical sense so I can avoid architectural mistakes early
+
+#### Use Case-Specific Design Stories
+- **As a chatbot architect**, I want to design the conversation flow from user input through NLP processing, knowledge retrieval, and response generation so I can plan the complete system
+- **As a RAG system designer**, I want to configure the pipeline from document ingestion through chunking, embedding, storage, retrieval, and generation so I can optimize for my specific content type
+- **As a content generation architect**, I want to design workflows with prompt engineering, fine-tuned models, and output structuring so I can deliver consistent, high-quality content
+
+#### Planning & Validation Stories
+- **As an architect**, I want to export my custom architecture design so I can share it with development teams and stakeholders
+- **As a project planner**, I want to estimate complexity and resource requirements based on my component selection so I can create realistic project timelines
+- **As a technical reviewer**, I want to validate architecture designs against best practices and common patterns so I can provide informed feedback
+
 ## Getting Started
 
 ### Prerequisites
