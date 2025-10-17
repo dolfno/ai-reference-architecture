@@ -14,6 +14,16 @@ This application provides an interactive, visual reference guide to GenAI archit
 - **Advanced Patterns**: RAG, AI agents, fine-tuning, evaluation, and guardrails
 - **Infrastructure**: Deployment, monitoring, scaling, security, and caching
 
+## Screenshots
+
+### Interactive Architecture Diagram
+![Architecture Diagram](./screenshots/architecture-diagram.png)
+*Explore the complete GenAI architecture with interactive components and connections*
+
+### Component Details Panel
+![Component Details](./screenshots/component-details.png)
+*Detailed explanations, use cases, and best practices for each component*
+
 ## Features
 
 - **Interactive Architecture Diagram**: Explore components and their relationships visually using ReactFlow
@@ -92,6 +102,10 @@ ai-reference-architecture/
 - **Embeddings**: Vector representations for semantic understanding
 - **Vector Databases**: Specialized databases for embeddings (Pinecone, Weaviate, etc.)
 - **Prompt Engineering**: Techniques for effective prompting
+- **Reranker Model**: Models that reorder search results to improve relevance
+- **Chunker**: Text splitting strategies for optimal processing and retrieval
+- **Output Structurer**: Tools for formatting and structuring LLM outputs
+- **Keyword Search**: Traditional text search using BM25, TF-IDF, trigrams
 
 ### Advanced Patterns
 - **RAG (Retrieval Augmented Generation)**: Knowledge-grounded responses
@@ -102,6 +116,13 @@ ai-reference-architecture/
 - **Guardrails**: Safety and validation
 - **Semantic Search**: Meaning-based search
 - **Orchestration**: Workflow management
+- **Community Detection**: Graph algorithms for identifying clusters of related entities
+- **Relationship Extraction**: NLP techniques for identifying relationships between entities
+- **Entity Extraction**: NLP technique for identifying and classifying named entities
+- **Query Routing**: Directing queries to appropriate models or systems based on intent
+- **LLM Graph Creator**: Tools for creating knowledge graphs using Large Language Models
+- **Knowledge Graph**: Graph-based knowledge representation connecting entities and relationships
+- **Sliding Context Window**: Dynamic context management for long conversations and documents
 
 ### Infrastructure
 - **Data Pipeline**: Data processing and preparation
@@ -156,75 +177,9 @@ updateComponent({
 });
 ```
 
-### Styling
-
-- Global styles: `src/index.css`
-- App layout: `src/App.css`
-- Diagram styles: `src/components/ArchitectureDiagram.css`
-- Detail panel: `src/components/ComponentDetail.css`
-
-### Colors
-
-Category colors are defined in `src/data/architectureData.js`:
-- Core Components: `#3B82F6` (blue)
-- Advanced Patterns: `#8B5CF6` (purple)
-- Infrastructure: `#10B981` (green)
-
-## Use Cases
-
-This reference is useful for:
-
-- **Developers** building GenAI applications
-- **Architects** designing GenAI systems
-- **Product Managers** understanding capabilities
-- **Students** learning GenAI concepts
-- **Teams** aligning on architecture decisions
-
-## Contributing
-
-Contributions are welcome! To contribute:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-Areas for contribution:
-- Adding more components through the data manager
-- Improving component descriptions
-- Adding code examples
-- Enhancing visualizations
-- Adding new categories
-- Improving the data management interface
-- Fixing bugs
-
-## Future Enhancements
-
-Potential improvements:
-- [ ] Code examples for each component
-- [ ] Search functionality within the data manager
-- [ ] Filter by category
-- [ ] Export diagram as image
-- [ ] Dark mode
-- [ ] Real-world architecture patterns
-- [ ] Integration examples
-- [ ] Video tutorials
-- [ ] Cost calculators
-- [ ] Community-contributed patterns
-- [ ] Component versioning
-- [ ] Collaborative editing
-
 ## License
 
 MIT License - feel free to use this project for learning and commercial purposes.
-
-## Resources
-
-- [OpenAI Documentation](https://platform.openai.com/docs)
-- [Anthropic Claude Docs](https://docs.anthropic.com)
-- [LangChain Documentation](https://python.langchain.com)
-- [Hugging Face](https://huggingface.co)
-- [ReactFlow Documentation](https://reactflow.dev)
 
 ## Support
 
