@@ -37,7 +37,7 @@ function App() {
         <div className="header-content">
           <div className="header-title">
             <Brain size={32} />
-            <h1>GenAI Architecture Reference</h1>
+            <h1>GenAI Reference Architecture</h1>
           </div>
           <p className="header-subtitle">
             Interactive guide to understanding the components, patterns, and infrastructure of Generative AI applications

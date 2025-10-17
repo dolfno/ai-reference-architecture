@@ -1,8 +1,8 @@
-# GenAI Architecture Reference
+# GenAI Reference Architecture
 
 An interactive web application that helps developers understand the components, patterns, and infrastructure of Generative AI applications.
 
-![GenAI Architecture Reference](https://img.shields.io/badge/Status-Active-success)
+![GenAI Reference Architecture](https://img.shields.io/badge/Status-Active-success)
 ![React](https://img.shields.io/badge/React-18.3-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
